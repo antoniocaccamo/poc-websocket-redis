@@ -5,5 +5,5 @@ package me.antoniocaccamo.poc_websocket_redis.redis;
  */
 public interface MessagePublisher {
 
-    public void publish(final String message) ;
+    public void publish(final String subtopic, final String message) ;
 }

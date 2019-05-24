@@ -1,5 +1,6 @@
 package me.antoniocaccamo.poc_websocket_redis.redis;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
@@ -21,7 +22,13 @@ public class RedisMessagePublisher implements MessagePublisher {
     }
 
     @Override
-    public void publish(final String message) {
-        redisTemplate.convertAndSend(topic.getTopic(), message);
+    public void publish(final String subTopic, final String message) {
+        String tpc = null;
+        if (StringUtils.isNotEmpty(subTopic)) {
+            tpc = String.format("%s::%s", topic.getTopic(), subTopic);
+        } else {
+            tpc = topic.getTopic();
+        }
+        redisTemplate.convertAndSend(tpc, message);
     }
 }
