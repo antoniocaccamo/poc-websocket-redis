@@ -5,6 +5,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,9 +16,9 @@ public class RedisMessagePublisher implements MessagePublisher {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
     @Autowired
-    private ChannelTopic topic;
+    private PatternTopic topic;
 
-    public RedisMessagePublisher(final RedisTemplate<String, Object> redisTemplate, final ChannelTopic topic) {
+    public RedisMessagePublisher(final RedisTemplate<String, Object> redisTemplate, final PatternTopic topic) {
         this.redisTemplate = redisTemplate;
         this.topic = topic;
     }

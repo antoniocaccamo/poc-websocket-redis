@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.listener.ChannelTopic;
+import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.data.redis.listener.RedisMessageListenerContainer;
 import org.springframework.data.redis.listener.adapter.MessageListenerAdapter;
 import org.springframework.data.redis.serializer.GenericToStringSerializer;
@@ -44,12 +45,13 @@ public class RedisConfiguration {
         final RedisMessageListenerContainer container = new RedisMessageListenerContainer();
         container.setConnectionFactory(jedisConnectionFactory());
         container.addMessageListener(messageListener(), topic());
+        container.
         return container;
     }
 
     @Bean
     MessagePublisher redisPublisher() {
-        return new RedisMessagePublisher(redisTemplate(), new ChannelTopic("pubsub:players*"));
+        return new RedisMessagePublisher(redisTemplate(), new PatternTopic("pubsub:players*"));
     }
 
     @Bean
