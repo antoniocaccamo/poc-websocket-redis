@@ -1,5 +1,6 @@
 package me.antoniocaccamo.poc_websocket_redis.redis;
 
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service;
 /**
  * @author antonioaccamo on 24/05/2019.
  */
-@Service
+@Service @Slf4j
 public class RedisMessagePublisher implements MessagePublisher {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
@@ -29,6 +30,7 @@ public class RedisMessagePublisher implements MessagePublisher {
         } else {
             tpc = topic.getTopic();
         }
+        log.info("publish on topic {} => message {} ", tpc, message);
         redisTemplate.convertAndSend(tpc, message);
     }
 }

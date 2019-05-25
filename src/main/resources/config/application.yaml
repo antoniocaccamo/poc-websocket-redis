@@ -1,6 +1,11 @@
 server:
   port: 8080
-
+  tomcat:
+    accesslog:
+      enabled: true
+      directory: tmc-emb
+      prefix : stdout
+      buffered : false
 
 
 spring:

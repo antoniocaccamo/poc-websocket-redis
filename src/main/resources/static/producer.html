@@ -7,6 +7,7 @@
     <script src="/webjars/jquery/jquery.min.js"></script>
     <script src="/webjars/sockjs-client/sockjs.min.js"></script>
     <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/webjars/bower/purl.js"></script>
 
 </head>
 <body>
@@ -49,9 +50,21 @@
         </div>
     </div>
 </div>
+
 <script src="/app.js"></script>
 <script>
     var playerId = 10;
+    $(function () {
+
+        $( "#connect" ).click(function() {
+              connect('producer');
+          });
+
+        $( "#send" ).click(function() {
+              sendName('producer');
+        });
+    });
+
 </script>
 </body>
 </html>

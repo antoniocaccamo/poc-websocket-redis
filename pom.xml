@@ -11,7 +11,7 @@
     <groupId>me.antoniocaccamo</groupId>
     <artifactId>poc-websocket-redis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>poc-websocket-redis</name>
+    <name>poc :: websocket-redis</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
@@ -30,7 +30,6 @@
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
-
         </dependency>
 
         <dependency>
@@ -67,6 +66,22 @@
             <version>3.1.0</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/org.webjars.bower/purl -->
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>purl</artifactId>
+            <version>2.3.1</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/ch.qos.logback/logback-access -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-access</artifactId>
+            <version>1.2.3</version>
+        </dependency>
+
+
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -77,6 +92,11 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot</artifactId>
+            <version>2.1.5.RELEASE</version>
         </dependency>
 
     </dependencies>

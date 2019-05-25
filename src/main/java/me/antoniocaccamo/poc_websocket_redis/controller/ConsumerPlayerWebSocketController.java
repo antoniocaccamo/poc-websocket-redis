@@ -1,5 +1,6 @@
 package me.antoniocaccamo.poc_websocket_redis.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import me.antoniocaccamo.poc_websocket_redis.model.Greeting;
 import me.antoniocaccamo.poc_websocket_redis.model.HelloMessage;
 import me.antoniocaccamo.poc_websocket_redis.redis.RedisMessagePublisher;
@@ -9,21 +10,19 @@ import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 
-import javax.websocket.server.PathParam;
-
-@Controller
-public class PlayerWebSocketController {
+@Controller @Slf4j
+public class ConsumerPlayerWebSocketController {
 
     @Autowired
     private RedisMessagePublisher redisMessagePublisher;
 
-    @MessageMapping("/players/{player}")
-    @SendTo(  "/topic/players/{player}")
+    @MessageMapping("/consumer/players/{player}")
+    @SendTo(  "/topic/consumer/players/{player}")
     public Greeting greeting(@DestinationVariable("player") String player, HelloMessage message) throws Exception {
+        log.info("received message from player consumer {} : {}", player, message);
         Thread.sleep(1000); // simulated delay
         String s = String.format("Hello, %s(%s)!", player, message.getName());
-        redisMessagePublisher.publish(player, s);
-        return new Greeting(s);
+        return new Greeting(player, s);
     }
 
 

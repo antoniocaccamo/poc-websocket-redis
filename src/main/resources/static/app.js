@@ -13,14 +13,16 @@ function setConnected(connected) {
     $("#greetings").html("");
 }
 
-function connect() {
-    var socket = new SockJS('/js-websocket');
+function connect(suffix) {
+    var socket = new SockJS('/js-websocket-' + suffix);
     stompClient = Stomp.over(socket);
     stompClient.connect({}, function (frame) {
         setConnected(true);
         console.log('Connected: ' + frame);
-        stompClient.subscribe('/topic/players/'+playerId, function (greeting) {
-            showGreeting(JSON.parse(greeting.body).content);
+        stompClient.subscribe(
+            '/topic/' + suffix + '/players/'+playerId,
+            function (greeting) {
+                showGreeting(JSON.parse(greeting.body).content);
         });
     });
 }
@@ -33,8 +35,12 @@ function disconnect() {
     console.log("Disconnected");
 }
 
-function sendName() {
-    stompClient.send("/app/players/"+playerId, {}, JSON.stringify({'name': $("#name").val()}));
+function sendName(suffix) {
+    stompClient.send(
+        "/app/"+ suffix + "/players/"+playerId,
+        {},
+        JSON.stringify({'name': $("#name").val()})
+    );
 }
 
 function showGreeting(message) {
@@ -45,7 +51,7 @@ $(function () {
     $("form").on('submit', function (e) {
         e.preventDefault();
     });
-    $( "#connect" ).click(function() { connect(); });
+//  $( "#connect" ).click(function() { connect(); });
     $( "#disconnect" ).click(function() { disconnect(); });
-    $( "#send" ).click(function() { sendName(); });
+//  $( "#send" ).click(function() { sendName(); });
 });

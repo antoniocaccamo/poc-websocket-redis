@@ -49,7 +49,7 @@ public class RedisConfiguration {
 
     @Bean
     MessagePublisher redisPublisher() {
-        return new RedisMessagePublisher(redisTemplate(), topic());
+        return new RedisMessagePublisher(redisTemplate(), new ChannelTopic("pubsub:players*"));
     }
 
     @Bean
