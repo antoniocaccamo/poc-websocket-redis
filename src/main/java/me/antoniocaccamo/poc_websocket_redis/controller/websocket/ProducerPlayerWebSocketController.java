@@ -1,4 +1,4 @@
-package me.antoniocaccamo.poc_websocket_redis.controller;
+package me.antoniocaccamo.poc_websocket_redis.controller.websocket;
 
 import lombok.extern.slf4j.Slf4j;
 import me.antoniocaccamo.poc_websocket_redis.model.Greeting;

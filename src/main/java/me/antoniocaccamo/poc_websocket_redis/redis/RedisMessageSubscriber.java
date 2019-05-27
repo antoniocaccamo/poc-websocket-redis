@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author antonioaccamo on 24/05/2019.
+ * @author antoniocaccamo on 24/05/2019.
  */
 @Slf4j
 public class RedisMessageSubscriber implements MessageListener {
@@ -30,13 +30,12 @@ public class RedisMessageSubscriber implements MessageListener {
         messageList.add(message.toString());
         log.info("Message received: " + new String(message.getBody()));
         try (
-            HelloMessage hm =
-                new ObjectMapper().readValue(message.getBody(), HelloMessage.class)){
+            HelloMessage hm = new ObjectMapper().readValue(message.getBody(), HelloMessage.class)){
 
             Greeting greeting = new Greeting(hm.getPlayer(), hm.getName());
 
-            template.convertAndSend("/topic/producer/players/10", greeting);
-            template.convertAndSend("/topic/consumer/players/10", greeting);
+//          template.convertAndSend(String.format("/topic/producer/players/%s", hm.getPlayer()), greeting);
+            template.convertAndSend(String.format("/topic/consumer/players/%s", hm.getPlayer()), greeting);
 
             log.info("message sent : {}", greeting);
 

@@ -9,7 +9,7 @@ import org.springframework.data.redis.listener.PatternTopic;
 import org.springframework.stereotype.Service;
 
 /**
- * @author antonioaccamo on 24/05/2019.
+ * @author antoniocaccamo on 24/05/2019.
  */
 @Service @Slf4j
 public class RedisMessagePublisher implements MessagePublisher {
@@ -26,11 +26,7 @@ public class RedisMessagePublisher implements MessagePublisher {
     @Override
     public void publish(final String subTopic, final String message) {
         String tpc = null;
-        if (StringUtils.isNotEmpty(subTopic)) {
-            tpc = String.format("%s::%s", topic.getTopic(), subTopic);
-        } else {
-            tpc = topic.getTopic();
-        }
+        tpc = String.format("players:%s:message", topic.getTopic(), subTopic);
         log.info("publish on topic {} => message {} ", tpc, message);
         redisTemplate.convertAndSend(tpc, message);
     }
