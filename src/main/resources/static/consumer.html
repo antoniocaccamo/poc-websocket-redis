@@ -56,11 +56,14 @@
     var playerId = 10;
     $(function () {
 
-        $( "#connect" ).click(function() { connect('consumer'); });
-        $( "#send" ).click(function() { sendName('consumer'); });
+        $( "#connect" ).click(function() {
+            connect('consumer');
+        });
 
+        $( "#send" ).click(function() {
+            sendName('consumer');
+        });
     });
-
 </script>
 </body>
 </html>
