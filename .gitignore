@@ -6,3 +6,6 @@ prefs.properties*
 .settings/*
 src/main/statics/mplayer
 src/main/statics/videos
+**/.*path
+*.project
+*.iml
